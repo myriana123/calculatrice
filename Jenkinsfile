@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-triggers{
-pollSCM('* * * * *')
-}
+    triggers{
+     pollSCM('* * * * *')
+       }
 
     stages {
       
@@ -40,5 +40,12 @@ stage("Couverture de code") {
 ])
            }
         }
+ }
+   post {
+ always {
+ mail to: 'mariamaitelharraj@gmail.com',
+ subject: "Cher lion Votre compilation est terminée: ${currentBuild.fullDisplayName}",
+ body: " Votre build est accompli, Veuilez vérifier: ${env.BUILD_URL}"
+ }
  }
 }
